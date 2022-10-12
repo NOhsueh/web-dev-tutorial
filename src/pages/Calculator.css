@@ -1,0 +1,65 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator {
+    display: grid;
+    grid-template-areas:
+        'result result result result'
+        'plus subtract multiply divide'
+        'number-7 number-8 number-9 docker'
+        'number-4 number-5 number-6 github'
+        'number-1 number-2 number-3 ac'
+        'number-0 dot equal equal';
+
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(6, 16.67%);
+
+    height: 400px;
+    width: 300px;
+    background-color: #f0f3fc;
+    border-radius: 8px;
+    border-style: solid;
+    border-color: #9d9ca16e;
+    border-width: 1px;
+    box-shadow: 0px 0px 29px 1px rgba(0, 0, 0, 0.359);
+}
+
+.result {
+    text-align: right;
+    line-height: var(--button-height);
+    font-size: 48px;
+    font-family: Helvetica;
+    border-radius: 3%;
+    padding: 0 5%;
+}
+
+
+/* .buttons {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    bottom: 0;
+} */
+
+.calculator button {
+    display: block;
+    padding: 0;
+    margin: 3%;
+    font-size: 100%;
+    border-radius: 3%;
+    border: none;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.359);
+    transition-duration: 0.4s;
+}
+
+.calculator button:hover {
+    background-color: #F8F9FA;
+}
+
+.calculator button:active {
+    transform: translateY(2%);
+}
