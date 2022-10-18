@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './Calculator.css'
+import Navigation from '../../components/Navigation'
 
 export default function App() {
   // result
@@ -161,122 +162,124 @@ export default function App() {
   }
 
   return (
-    <div className='calculator' tabIndex={0} onKeyDown={keyDown}>
-      <div className='result' style={{ gridArea: 'result' }}>{equation}</div>
-      <button
-        style={{ gridArea: 'plus' }}
-        onClick={() => append('+')}
-      >
-        ➕
-      </button>
-      <button
-        style={{ gridArea: 'subtract' }}
-        onClick={() => append('-')}
-      >
-        ➖
-      </button>
-      <button
-        style={{ gridArea: 'multiply' }}
-        onClick={() => append('x')}
-      >
-        ✖️
-      </button>
-      <button
-        style={{ gridArea: 'divide' }}
-        onClick={() => append('÷')}
-      >
-        ➗
-      </button>
-      <button
-        style={{ gridArea: 'number-7' }}
-        onClick={() => append('7')}
-      >
-        7
-      </button>
-      <button
-        style={{ gridArea: 'number-8' }}
-        onClick={() => append('8')}
-      >
-        8
-      </button>
-      <button
-        style={{ gridArea: 'number-9' }}
-        onClick={() => append('9')}
-      >
-        9
-      </button>
-      <button
-        style={{ gridArea: 'docker' }}
-        onClick={() => window.location.href = "https://hub.docker.com/"}
-      >
-        Docker
-      </button>
-      <button
-        style={{ gridArea: 'number-4' }}
-        onClick={() => append('4')}
-      >
-        4
-      </button>
-      <button
-        style={{ gridArea: 'number-5' }}
-        onClick={() => append('5')}
-      >
-        5
-      </button>
-      <button
-        style={{ gridArea: 'number-6' }}
-        onClick={() => append('6')}
-      >
-        6
-      </button>
-      <button
-        style={{ gridArea: 'github' }}
-        onClick={() => window.location.href = "https://github.com/"}
-      >
-        GitHub
-      </button>
-      <button
-        style={{ gridArea: 'number-1' }}
-        onClick={() => append('1')}
-      >
-        1
-      </button>
-      <button
-        style={{ gridArea: 'number-2' }}
-        onClick={() => append('2')}
-      >
-        2
-      </button>
-      <button
-        style={{ gridArea: 'number-3' }}
-        onClick={() => append('3')}
-      >
-        3
-      </button>
-      <button
-        style={{ gridArea: 'ac' }}
-        onClick={clear}
-      >
-        🔚
-      </button>
-      <button
-        style={{ gridArea: 'number-0' }}
-        onClick={() => append('0')}
-      >
-        0
-      </button>
-      <button
-        style={{ gridArea: 'dot' }}
-        onClick={() => append('.')}
-      >
-        .
-      </button>
-      <button
-        style={{ gridArea: 'equal' }}
-        onClick={() => calculate(undefined)}
-      >
-        🟰
-      </button>
+    <div><Navigation />
+      <div className='calculator' tabIndex={0} onKeyDown={keyDown}>
+        <div className='result' style={{ gridArea: 'result' }}>{equation}</div>
+        <button
+          style={{ gridArea: 'plus' }}
+          onClick={() => append('+')}
+        >
+          ➕
+        </button>
+        <button
+          style={{ gridArea: 'subtract' }}
+          onClick={() => append('-')}
+        >
+          ➖
+        </button>
+        <button
+          style={{ gridArea: 'multiply' }}
+          onClick={() => append('x')}
+        >
+          ✖️
+        </button>
+        <button
+          style={{ gridArea: 'divide' }}
+          onClick={() => append('÷')}
+        >
+          ➗
+        </button>
+        <button
+          style={{ gridArea: 'number-7' }}
+          onClick={() => append('7')}
+        >
+          7
+        </button>
+        <button
+          style={{ gridArea: 'number-8' }}
+          onClick={() => append('8')}
+        >
+          8
+        </button>
+        <button
+          style={{ gridArea: 'number-9' }}
+          onClick={() => append('9')}
+        >
+          9
+        </button>
+        <button
+          style={{ gridArea: 'docker' }}
+          onClick={() => window.location.href = "https://hub.docker.com/"}
+        >
+          Docker
+        </button>
+        <button
+          style={{ gridArea: 'number-4' }}
+          onClick={() => append('4')}
+        >
+          4
+        </button>
+        <button
+          style={{ gridArea: 'number-5' }}
+          onClick={() => append('5')}
+        >
+          5
+        </button>
+        <button
+          style={{ gridArea: 'number-6' }}
+          onClick={() => append('6')}
+        >
+          6
+        </button>
+        <button
+          style={{ gridArea: 'github' }}
+          onClick={() => window.location.href = "https://github.com/"}
+        >
+          GitHub
+        </button>
+        <button
+          style={{ gridArea: 'number-1' }}
+          onClick={() => append('1')}
+        >
+          1
+        </button>
+        <button
+          style={{ gridArea: 'number-2' }}
+          onClick={() => append('2')}
+        >
+          2
+        </button>
+        <button
+          style={{ gridArea: 'number-3' }}
+          onClick={() => append('3')}
+        >
+          3
+        </button>
+        <button
+          style={{ gridArea: 'ac' }}
+          onClick={clear}
+        >
+          🔚
+        </button>
+        <button
+          style={{ gridArea: 'number-0' }}
+          onClick={() => append('0')}
+        >
+          0
+        </button>
+        <button
+          style={{ gridArea: 'dot' }}
+          onClick={() => append('.')}
+        >
+          .
+        </button>
+        <button
+          style={{ gridArea: 'equal' }}
+          onClick={() => calculate(undefined)}
+        >
+          🟰
+        </button>
+      </div>
     </div>
   )
 }

@@ -1,11 +1,7 @@
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .calculator {
     display: grid;
+    position: relative;
+    margin: 8% auto 0;
     grid-template-areas:
         'result result result result'
         'plus subtract multiply divide'
