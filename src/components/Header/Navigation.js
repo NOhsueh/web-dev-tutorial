@@ -1,4 +1,4 @@
-import { HomeOutlined, SettingOutlined, AppstoreOutlined, GithubOutlined } from '@ant-design/icons';
+import { HomeOutlined, AppstoreOutlined, LoginOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,12 +11,6 @@ const items = [
     ),
     key: '/',
     icon: <HomeOutlined />,
-  },
-  {
-    label: 'Setting',
-    key: 'set',
-    icon: <SettingOutlined />,
-    disabled: true,
   },
   {
     label: 'Appstore',
@@ -39,12 +33,16 @@ const items = [
   },
   {
     label: (
-      <a href='https://github.com/NOhsueh' target='_blank' rel='noopener noreferrer'>
-        Github
-      </a>
+      <Link to='/login'>Login</Link>
     ),
-    key: 'github',
-    icon: <GithubOutlined />,
+    key: '/login',
+    icon: <LoginOutlined />,
+  },
+  {
+    label: (
+      <Link to='/register'>Register</Link>
+    ),
+    key: '/register',
   },
 ];
 const Navigation = () => {

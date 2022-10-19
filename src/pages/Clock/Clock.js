@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import './Clock.css'
-import Navigation from '../../components/Navigation'
+import Navigation from '../../components/Header/Navigation'
 
 export default function App() {
   const hEl = useRef()

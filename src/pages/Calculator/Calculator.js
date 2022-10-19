@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Calculator.css'
-import Navigation from '../../components/Navigation'
+import Navigation from '../../components/Header/Navigation'
 
 export default function App() {
   // result
@@ -209,9 +209,8 @@ export default function App() {
         </button>
         <button
           style={{ gridArea: 'docker' }}
-          onClick={() => window.location.href = "https://hub.docker.com/"}
         >
-          Docker
+          <a href='https://hub.docker.com/u/nohsueh' target='_blank' rel='noopener noreferrer'>Docker</a>
         </button>
         <button
           style={{ gridArea: 'number-4' }}
@@ -233,9 +232,8 @@ export default function App() {
         </button>
         <button
           style={{ gridArea: 'github' }}
-          onClick={() => window.location.href = "https://github.com/"}
         >
-          GitHub
+          <a href='https://github.com/NOhsueh' target='_blank' rel='noopener noreferrer'>GitHub</a>
         </button>
         <button
           style={{ gridArea: 'number-1' }}
