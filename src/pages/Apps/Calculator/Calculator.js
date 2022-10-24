@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './Calculator.css'
-import Navigation from '../../components/Header/Navigation'
+import Navigation from '../../../components/Header/Navigation'
 
-export default function App() {
+export default function Calculator() {
   // result
   const [equation, setEquation] = useState("0")
   // 判断是否已经输入了小数，防止连续输入小数点

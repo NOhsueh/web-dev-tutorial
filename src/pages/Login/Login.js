@@ -9,37 +9,49 @@ axios.defaults.baseURL = 'http://localhost:8080';
 
 const Login = () => {
     const openNotification = (check) => {
-        if(check){
+        if (check===true) {
             notification.open({
                 message: 'Login successful',
                 description:
                     'Welcome!',
                 icon: (
-                        <SmileOutlined
+                    <SmileOutlined
                         style={{
                             color: '#108ee9',
                         }}
                     />
-                    
+
+                ),
+            });
+        }
+        else if(check===false) {
+            notification.open({
+                message: 'Login failed',
+                description:
+                    'Check your username or password.',
+                icon: (
+                    <FrownOutlined
+                        style={{
+                            color: '#c92d0a',
+                        }}
+                    />
                 ),
             });
         }
         else{
             notification.open({
-                message: 'Login failed',
+                message: 'Error',
                 description:
-                    'So sad.',
+                    check,
                 icon: (
-                        <FrownOutlined
+                    <FrownOutlined
                         style={{
                             color: '#c92d0a',
                         }}
                     />
-                    
                 ),
             });
         }
-        
     };
     const onFinish = (values) => {
         axios.get('/login', {
@@ -53,6 +65,7 @@ const Login = () => {
             })
             .catch(function (error) {
                 console.log(error);
+                openNotification(error.message);
             })
             .then(function () {
                 // 总是会执行

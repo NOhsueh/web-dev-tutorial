@@ -29,6 +29,12 @@ const items = [
         ),
         key: '/calculator',
       },
+      {
+        label: (
+          <Link to='/photoviewer'>PhotoViewer</Link>
+        ),
+        key: '/photoviewer',
+      },
     ],
   },
   {
