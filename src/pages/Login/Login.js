@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './Login.css';
 import Navigation from '../../components/Header/Navigation';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = 'http://43.143.171.145:8080';
 
 const Login = () => {
     const openNotification = (check) => {

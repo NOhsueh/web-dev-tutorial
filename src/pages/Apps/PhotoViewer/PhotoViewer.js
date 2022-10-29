@@ -1,95 +1,59 @@
-import { SmileOutlined, FrownOutlined } from '@ant-design/icons';
-import { notification, Image } from 'antd';
-import React from 'react';
+import { DatePicker, Image, Space } from 'antd';
+import React, { useState, useEffect } from 'react';
 import Navigation from '../../../components/Header/Navigation';
 import './PhotoViewer.css';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:8080';
 
-const loadPhoto = (photo) => {
-  axios.get('/loadPhoto', {
-    params: {
-      time: photo.time,
-      city: photo.city,
-      direction: photo.direction,
-      distance: photo.distance,
-      district: photo.district,
-      province: photo.province,
-      street: photo.street,
-      street_number: photo.street_number,
-    }
-  })
-    .then(function (response) {
-      openNotification(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-      openNotification(error.message);
-    })
-    .then(function () {
-      // 总是会执行
-    });
-};
+axios.defaults.baseURL = 'http://43.143.171.145:8080';
+const baseURL = 'http://43.143.171.145:8080';
 
-const openNotification = (check) => {
-  if (check === true) {
-    notification.open({
-      message: 'Successfully uploaded the photo',
-      icon: (
-        <SmileOutlined
-          style={{
-            color: '#108ee9',
-          }}
-        />
 
-      ),
-    });
-  }
-  else if (check === false) {
-    notification.open({
-      message: 'Failed to upload photo',
-      icon: (
-        <FrownOutlined
-          style={{
-            color: '#c92d0a',
-          }}
-        />
-      ),
-    });
-  }
-  else {
-    notification.open({
-      message: 'Error',
-      description:
-        check,
-      icon: (
-        <FrownOutlined
-          style={{
-            color: '#c92d0a',
-          }}
-        />
-      ),
-    });
-  }
-};
+
 
 export default function PhotoViewer() {
+  const [photos, setPhotos] = useState([]);
+
+  const loadPhoto = (date, dateString) => {
+    axios.get('/loadPhoto', {
+      params: {
+        time: dateString,
+      }
+    })
+      .then(function (response) {
+        setPhotos(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        console.log(date);
+      });
+  };
+
+  useEffect(() => {
+    loadPhoto(null, null);
+    return;
+  }, []);
+
+  let Images = photos.map((photo, index) => {
+    return (<Image
+      loading='lazy'
+      key={index}
+      height={180}
+      src={baseURL + photo.file}
+      style={{ borderRadius: '5%', padding: '5px 5px 5px 5px', }}
+    />)
+  })
 
   return (
-    <>
+    <div>
       <Navigation />
-
-      <Image.PreviewGroup>
-        <Image
-          width={200}
-          height={200}
-          src="http://localhost:8080/photos/2022-10-26&106.2969&29.597864/IMG_20221026_222807.jpg" />
-        <Image
-          width={200}
-          height={200}
-          src="http://localhost:8080/photos/2022-10-26&106.29821&29.594332/IMG_20221026_162430.jpg"
-        />
-      </Image.PreviewGroup>
-    </>
+      <Space direction='vertical' style={{ margin: '20px 20px 20px 20px', }}>
+        <DatePicker onChange={loadPhoto} style={{ marginLeft: '50px', }}/>
+        <Image.PreviewGroup>
+          {Images}
+        </Image.PreviewGroup>
+      </Space>
+    </div>
   );
 };
