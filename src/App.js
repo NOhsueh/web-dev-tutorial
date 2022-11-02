@@ -13,12 +13,54 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Suspense><Home /></Suspense>} />
-                <Route path='*' element={<Suspense><NotFound /></Suspense>} />
-                <Route path='/clock' element={<Suspense><Clock /></Suspense>} />
-                <Route path='/calculator' element={<Suspense><Calculator /></Suspense>} />
-                <Route path='/photoviewer' element={<Suspense><PhotoViewer /></Suspense>} />
-                <Route path='/login' element={<Suspense><Login /></Suspense>} />
+                <Route
+                    path='/'
+                    element={
+                        <Suspense>
+                            <Home />
+                        </Suspense>
+                    }
+                />
+                <Route
+                    path='*'
+                    element={
+                        <Suspense>
+                            <NotFound />
+                        </Suspense>
+                    }
+                />
+                <Route
+                    path='/login'
+                    element={
+                        <Suspense>
+                            <Login />
+                        </Suspense>
+                    }
+                />
+                <Route
+                    path='/clock'
+                    element={
+                        <Suspense>
+                            <Clock />
+                        </Suspense>
+                    }
+                />
+                <Route
+                    path='/calculator'
+                    element={
+                        <Suspense>
+                            <Calculator />
+                        </Suspense>
+                    }
+                />
+                <Route
+                    path='/photoviewer'
+                    element={
+                        <Suspense>
+                            <PhotoViewer />
+                        </Suspense>
+                    }
+                />
             </Routes>
         </BrowserRouter>
     )
