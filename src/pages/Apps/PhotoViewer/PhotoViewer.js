@@ -1,4 +1,4 @@
-import { DatePicker, Image, Space } from 'antd';
+import { DatePicker, Image, Space, BackTop } from 'antd';
 import React, { useState, useEffect } from 'react';
 import Navigation from '../../../components/Header/Navigation';
 import './PhotoViewer.css';
@@ -36,24 +36,30 @@ export default function PhotoViewer() {
   }, []);
 
   let Images = photos.map((photo, index) => {
-    return (<Image
-      loading='lazy'
-      key={index}
-      height={180}
-      src={baseURL + photo.file}
-      style={{ borderRadius: '5%', padding: '5px 5px 5px 5px', }}
-    />)
+    return (
+      <Image
+        loading='lazy'
+        key={index}
+        height={180}
+        width={177}
+        src={baseURL + photo.file}
+        style={{ borderRadius: '7%', padding: '4px 4px 4px 4px', }}
+      />
+    );
   })
 
   return (
     <div>
       <Navigation />
       <Space direction='vertical' style={{ margin: '20px 20px 20px 20px', }}>
-        <DatePicker onChange={loadPhoto} style={{ marginLeft: '50px', }}/>
-        <Image.PreviewGroup>
+        <DatePicker onChange={loadPhoto} style={{ marginLeft: '50px', }} />
+        <Image.PreviewGroup >
           {Images}
         </Image.PreviewGroup>
       </Space>
+      <BackTop >
+        <div className='BackTop'>UP</div>
+      </BackTop>
     </div>
   );
 };
