@@ -52,12 +52,18 @@ export default function PhotoViewer() {
   }, [info])
 
   const timeChanged = (_, dateStirng) => {
+    if (dateStirng === '') {
+      dateStirng = '1970-01-01';
+    }
     setInfo(info => ({
       ...info,
       time: dateStirng,
     }));
   }
   const addressChanged = (addressString) => {
+    if (addressString === undefined) {
+      addressString = ['', '', '', ''];
+    }
     setInfo(info => ({
       ...info,
       province: addressString[0],
@@ -68,7 +74,6 @@ export default function PhotoViewer() {
   }
 
   const loadPhoto = async (info) => {
-    console.log('loadPhoto', info);
     axios.get('/loadPhoto', {
       params: {
         time: info.time,
@@ -92,7 +97,7 @@ export default function PhotoViewer() {
   let Images = photos.map((photo, index) => {
     return (
       <Image
-        title={photo.time+'\n'+photo.province+photo.city+photo.district+photo.street}
+        title={photo.time + '\n' + photo.province + photo.city + photo.district + photo.street}
         loading='lazy'
         key={index}
         height={180}
