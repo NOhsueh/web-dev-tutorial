@@ -9,15 +9,21 @@ axios.defaults.baseURL = 'http://43.143.171.145:8080';
 const options = [
   {
     value: '重庆市',
-    label: 'Chongqing',
+    label: '重庆市',
     children: [
       {
-        value: '沙坪坝区',
-        label: 'Shapingba',
+        value: '重庆市',
+        label: '重庆市',
         children: [
           {
-            value: '大学城西路',
-            label: 'Daxuechengxilu',
+            value: '沙坪坝区',
+            label: '沙坪坝区',
+            children: [
+              {
+                value: '大学城西路',
+                label: '大学城西路',
+              },
+            ],
           },
         ],
       },
@@ -27,45 +33,18 @@ const options = [
 
 export default function PhotoViewer() {
   useEffect(() => {
-    document.title='照片浏览器';
-    return;
-  });
+    document.title='照片浏览器'
+    loadPhoto(null, null);
+  },[]);
 
   const [photos, setPhotos] = useState([]);
-  const [info, setInfo] = useState({
-    time: '1970-01-01',
-    city: '',
-    direction: '',
-    distance: '',
-    district: '',
-    province: '',
-    street: '',
-    street_number: ''
-  });
 
-  const changeTime = (_, dateString) => {
-    setInfo(info.time = dateString);
-    loadPhoto();
-  };
+  const loadPhoto =async (_, dateString) => {
+    console.log('dateString' + dateString)
 
-  const changeAddress = (addressList) => {
-    setInfo(
-      info.province = addressList[0]
-    );
-    loadPhoto();
-  };
-
-  const loadPhoto = () => {
     axios.get('/loadPhoto', {
       params: {
-        time: info.time,
-        city: info.city,
-        direction: info.direction,
-        distance: info.distance,
-        district: info.district,
-        province: info.province,
-        street: info.street,
-        street_number: info.street_number,
+        time: dateString,
       }
     })
       .then(function (response) {
@@ -76,7 +55,7 @@ export default function PhotoViewer() {
       })
   };
 
-  let Images = photos.map(async (photo, index) => {
+  let Images = photos.map((photo, index) => {
     return (
       <Image
         loading='lazy'
@@ -94,14 +73,8 @@ export default function PhotoViewer() {
       <Navigation />
       <Space direction='vertical' style={{ margin: '30px', }}>
         <Space>
-          <DatePicker
-            onChange={changeTime}
-            style={{ margin: '11.5px', }}
-          />
-          <Cascader
-            options={options}
-            onChange={changeAddress}
-            placeholder="Please select" />
+          <DatePicker onChange={loadPhoto} style={{ margin: '11.5px', }} />
+          <Cascader options={options} onChange={loadPhoto} placeholder="Please select" />
         </Space>
 
         <Image.PreviewGroup >
