@@ -5,7 +5,7 @@ import Navigation from '../../../components/Header/Navigation'
 export default function Calculator() {
   useEffect(() => {
     document.title='计算器';
-  });
+  },[]);
 
   // result
   const [equation, setEquation] = useState("0")
