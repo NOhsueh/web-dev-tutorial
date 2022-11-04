@@ -8,32 +8,16 @@ axios.defaults.baseURL = 'http://43.143.171.145:8080';
 
 const options = [
   {
-    value: 'zhejiang',
-    label: 'Zhejiang',
+    value: '重庆市',
+    label: 'Chongqing',
     children: [
       {
-        value: 'hangzhou',
-        label: 'Hangzhou',
+        value: '沙坪坝区',
+        label: 'Shapingba',
         children: [
           {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
+            value: '大学城西路',
+            label: 'Daxuechengxilu',
           },
         ],
       },
@@ -43,19 +27,45 @@ const options = [
 
 export default function PhotoViewer() {
   useEffect(() => {
-    loadPhoto(null, null);
+    document.title='照片浏览器';
     return;
-  }, []);
-  
+  });
+
   const [photos, setPhotos] = useState([]);
+  const [info, setInfo] = useState({
+    time: '1970-01-01',
+    city: '',
+    direction: '',
+    distance: '',
+    district: '',
+    province: '',
+    street: '',
+    street_number: ''
+  });
 
-  const loadPhoto = (date, dateString) => {
-    console.log('date'+date)
-    console.log('dateString'+dateString)
+  const changeTime = (_, dateString) => {
+    setInfo(info.time = dateString);
+    loadPhoto();
+  };
 
+  const changeAddress = (addressList) => {
+    setInfo(
+      info.province = addressList[0]
+    );
+    loadPhoto();
+  };
+
+  const loadPhoto = () => {
     axios.get('/loadPhoto', {
       params: {
-        time: dateString,
+        time: info.time,
+        city: info.city,
+        direction: info.direction,
+        distance: info.distance,
+        district: info.district,
+        province: info.province,
+        street: info.street,
+        street_number: info.street_number,
       }
     })
       .then(function (response) {
@@ -64,12 +74,9 @@ export default function PhotoViewer() {
       .catch(function (error) {
         console.log(error);
       })
-      .then(function () {
-        console.log(date);
-      });
   };
 
-  let Images = photos.map((photo, index) => {
+  let Images = photos.map(async (photo, index) => {
     return (
       <Image
         loading='lazy'
@@ -87,8 +94,14 @@ export default function PhotoViewer() {
       <Navigation />
       <Space direction='vertical' style={{ margin: '30px', }}>
         <Space>
-          <DatePicker onChange={loadPhoto}  style={{ margin: '11.5px', }}/>
-          <Cascader options={options} onChange={loadPhoto} placeholder="Please select" />
+          <DatePicker
+            onChange={changeTime}
+            style={{ margin: '11.5px', }}
+          />
+          <Cascader
+            options={options}
+            onChange={changeAddress}
+            placeholder="Please select" />
         </Space>
 
         <Image.PreviewGroup >

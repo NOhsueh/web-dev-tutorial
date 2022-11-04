@@ -8,6 +8,10 @@ export default function Clock() {
   const sEl = useRef()
 
   useEffect(() => {
+    document.title='时钟';
+  });
+
+  useEffect(() => {
     clock()
     const timer = setInterval(() => clock(), 1000)
     return () => clearInterval(timer)

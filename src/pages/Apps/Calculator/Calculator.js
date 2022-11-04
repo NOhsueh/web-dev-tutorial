@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState,  useEffect} from 'react'
 import './Calculator.css'
 import Navigation from '../../../components/Header/Navigation'
 
 export default function Calculator() {
+  useEffect(() => {
+    document.title='计算器';
+  });
+
   // result
   const [equation, setEquation] = useState("0")
   // 判断是否已经输入了小数，防止连续输入小数点
