@@ -33,18 +33,44 @@ const options = [
 
 export default function PhotoViewer() {
   useEffect(() => {
-    document.title='照片浏览器'
-    loadPhoto(null, null);
-  },[]);
+    document.title = '照片浏览器';
+    loadPhoto();
+  }, []);
 
   const [photos, setPhotos] = useState([]);
+  const [info, setInfo] = useState(
+    {
+      time: "1970-01-01",
+      city: "重庆市",
+      direction: "",
+      distance: "",
+      district: "",
+      province: "",
+      street: "",
+      street_number: "",
+    }
+  );
 
-  const loadPhoto =async (_, dateString) => {
-    console.log('dateString' + dateString)
+  const timeChanged = (_, dateStirng) => {
+    let datepicker = JSON.parse(JSON.stringify(info));
+    datepicker.time = dateStirng;
+    setInfo(datepicker)
+  }
 
+  const addressChanged = (addressString) => {
+    let cascader = JSON.parse(JSON.stringify(info));
+    cascader.province = addressString[0];
+    cascader.city = addressString[1];
+    cascader.district = addressString[2];
+    cascader.street = addressString[3];
+    setInfo(cascader)
+  }
+
+  const loadPhoto = async () => {
+    console.log('loadPhoto');
     axios.get('/loadPhoto', {
       params: {
-        time: dateString,
+        time: info.time,
       }
     })
       .then(function (response) {
@@ -73,8 +99,8 @@ export default function PhotoViewer() {
       <Navigation />
       <Space direction='vertical' style={{ margin: '30px', }}>
         <Space>
-          <DatePicker onChange={loadPhoto} style={{ margin: '11.5px', }} />
-          <Cascader options={options} onChange={loadPhoto} placeholder="Please select" />
+          <DatePicker onChange={timeChanged} style={{ margin: '11.5px', }} />
+          <Cascader options={options} onChange={addressChanged} placeholder="Please select" />
         </Space>
 
         <Image.PreviewGroup >
