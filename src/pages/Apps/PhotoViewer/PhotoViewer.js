@@ -1,4 +1,4 @@
-import { DatePicker, Image, Space, BackTop, Cascader } from 'antd';
+import { DatePicker, Image, Space, BackTop, Cascader, Button } from 'antd';
 import React, { useState, useEffect } from 'react';
 import Navigation from '../../../components/Header/Navigation';
 import './PhotoViewer.css';
@@ -36,7 +36,7 @@ export default function PhotoViewer() {
     document.title = '照片浏览器';
   }, []);
 
-  const [photos, setPhotos] = useState([]);
+  const [reverse, setReverse] = useState(false);
   const [info, setInfo] = useState({
     time: "1970-01-01",
     city: "",
@@ -47,9 +47,14 @@ export default function PhotoViewer() {
     street: "",
     street_number: "",
   });
+  const [photos, setPhotos] = useState([]);
+
   useEffect(() => {
     loadPhoto(info);
   }, [info])
+  useEffect(() => {
+    photos.reverse();
+  }, [reverse, photos])
 
   const timeChanged = (_, dateStirng) => {
     if (dateStirng === '') {
@@ -101,7 +106,7 @@ export default function PhotoViewer() {
         loading='lazy'
         key={index}
         height={180}
-        width={174}
+        width={(document.body.clientWidth - 34) / 7}
         src={axios.defaults.baseURL + photo.file}
         style={{ borderRadius: '7%', padding: '3px', }}
       />
@@ -111,12 +116,28 @@ export default function PhotoViewer() {
   return (
     <div>
       <Navigation />
-      <Space direction='vertical' style={{ margin: '30px', }}>
-        <Space>
-          <DatePicker onChange={timeChanged} style={{ margin: '11.5px', }} />
-          <Cascader options={options} onChange={addressChanged} placeholder="Please select" />
+      <div style={{ textAlign: 'center', }}>
+        <Space style={{ margin: '23px', textAlign: 'left', }}>
+          🥰
+          <DatePicker
+            onChange={timeChanged}
+          />
+          <Cascader
+            options={options}
+            onChange={addressChanged}
+            placeholder="Select address"
+          />
+          <Button
+            type="primary"
+            onClick={() => setReverse(reverse => !reverse)}
+          >
+            Reverse
+          </Button>
         </Space>
-
+      </div>
+      <Space
+        direction='vertical'
+        style={{ margin: '17px', }}>
         <Image.PreviewGroup >
           {Images}
         </Image.PreviewGroup>
