@@ -34,43 +34,51 @@ const options = [
 export default function PhotoViewer() {
   useEffect(() => {
     document.title = '照片浏览器';
-    loadPhoto();
   }, []);
 
   const [photos, setPhotos] = useState([]);
-  const [info, setInfo] = useState(
-    {
-      time: "1970-01-01",
-      city: "重庆市",
-      direction: "",
-      distance: "",
-      district: "",
-      province: "",
-      street: "",
-      street_number: "",
-    }
-  );
+  const [info, setInfo] = useState({
+    time: "1970-01-01",
+    city: "",
+    direction: "",
+    distance: "",
+    district: "",
+    province: "",
+    street: "",
+    street_number: "",
+  });
+  useEffect(() => {
+    loadPhoto(info);
+  }, [info])
 
   const timeChanged = (_, dateStirng) => {
-    let datepicker = JSON.parse(JSON.stringify(info));
-    datepicker.time = dateStirng;
-    setInfo(datepicker)
+    setInfo(info => ({
+      ...info,
+      time: dateStirng,
+    }));
   }
-
   const addressChanged = (addressString) => {
-    let cascader = JSON.parse(JSON.stringify(info));
-    cascader.province = addressString[0];
-    cascader.city = addressString[1];
-    cascader.district = addressString[2];
-    cascader.street = addressString[3];
-    setInfo(cascader)
+    setInfo(info => ({
+      ...info,
+      province: addressString[0],
+      city: addressString[1],
+      district: addressString[2],
+      street: addressString[3]
+    }));
   }
 
-  const loadPhoto = async () => {
-    console.log('loadPhoto');
+  const loadPhoto = async (info) => {
+    console.log('loadPhoto', info);
     axios.get('/loadPhoto', {
       params: {
         time: info.time,
+        city: info.city,
+        direction: info.direction,
+        distance: info.distance,
+        district: info.district,
+        province: info.province,
+        street: info.street,
+        street_number: info.street_number,
       }
     })
       .then(function (response) {
@@ -84,6 +92,7 @@ export default function PhotoViewer() {
   let Images = photos.map((photo, index) => {
     return (
       <Image
+        title={photo.time+'\n'+photo.province+photo.city+photo.district+photo.street}
         loading='lazy'
         key={index}
         height={180}
