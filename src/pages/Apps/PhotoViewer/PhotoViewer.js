@@ -106,7 +106,7 @@ export default function PhotoViewer() {
         loading='lazy'
         key={index}
         height={180}
-        width={(document.body.clientWidth - 34) / 7}
+        width={(document.body.clientWidth - 35) / 7}
         src={axios.defaults.baseURL + photo.file}
         style={{ borderRadius: '7%', padding: '3px', }}
       />
