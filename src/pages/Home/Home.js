@@ -1,4 +1,5 @@
 import Navigation from "../../components/Header/Navigation"
+import './Home.css'
 
 export default function Home() {
 
@@ -6,7 +7,7 @@ export default function Home() {
         <div>
             <Navigation />
             <h1 style={{ textAlign: 'center' }}>
-                <b>
+                <b className="home-words">
                     灵魂是肉体的监狱
                 </b>
             </h1>

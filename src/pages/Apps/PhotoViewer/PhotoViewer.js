@@ -99,9 +99,10 @@ export default function PhotoViewer() {
       })
   };
 
-  let Images = photos.map((photo) => {
+  let Images = photos.map((photo, index) => {
     return (
       <Image
+        key={index}
         title={photo.time + '\n' + photo.province + photo.city + photo.district + photo.street}
         loading='lazy'
         height={180}

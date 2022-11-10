@@ -7,20 +7,17 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                {PublicRoutes.map((route) => {
+                {PublicRoutes.map((route, index) => {
                     return (
-                        <Route path={route.path} element={route.element} />
+                        <Route key={index} path={route.path} element={route.element} />
                     );
                 })};
-                {AppsRoutes.map((route) => {
+                {AppsRoutes.map((route, index) => {
                     return (
-                        <Route path={route.path} element={route.element} />
+                        <Route key={index} path={route.path} element={route.element} />
                     );
                 })};
             </Routes>
         </BrowserRouter>
     )
 }
-
-
-
