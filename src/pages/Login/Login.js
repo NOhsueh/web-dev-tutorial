@@ -1,6 +1,6 @@
 import { LockOutlined, UserOutlined, SmileOutlined, FrownOutlined } from '@ant-design/icons';
 import { Button, Form, Input, notification } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import Navigation from '../../components/Header/Navigation';
@@ -8,8 +8,12 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://43.143.171.145:8080';
 
 const Login = () => {
+    useEffect(() => {
+        document.title = '登录';
+        return () => document.title = 'Nohsueh';
+    }, []);
     const openNotification = (check) => {
-        if (check===true) {
+        if (check === true) {
             notification.open({
                 message: 'Login successful',
                 description:
@@ -24,7 +28,7 @@ const Login = () => {
                 ),
             });
         }
-        else if(check===false) {
+        else if (check === false) {
             notification.open({
                 message: 'Login failed',
                 description:
@@ -38,7 +42,7 @@ const Login = () => {
                 ),
             });
         }
-        else{
+        else {
             notification.open({
                 message: 'Error',
                 description:

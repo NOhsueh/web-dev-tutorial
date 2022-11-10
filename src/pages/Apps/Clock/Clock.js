@@ -9,6 +9,7 @@ export default function Clock() {
 
   useEffect(() => {
     document.title='时钟';
+    return () => document.title = 'Nohsueh';
   },[]);
 
   useEffect(() => {

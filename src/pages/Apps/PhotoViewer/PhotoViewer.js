@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Navigation from '../../../components/Header/Navigation';
 import './PhotoViewer.css';
 import axios from 'axios';
-
 axios.defaults.baseURL = 'http://43.143.171.145:8080';
 
 const options = [
@@ -34,6 +33,7 @@ const options = [
 export default function PhotoViewer() {
   useEffect(() => {
     document.title = '照片浏览器';
+    return () => document.title = 'Nohsueh';
   }, []);
 
   const [reverse, setReverse] = useState(false);
@@ -99,12 +99,11 @@ export default function PhotoViewer() {
       })
   };
 
-  let Images = photos.map((photo, index) => {
+  let Images = photos.map((photo) => {
     return (
       <Image
         title={photo.time + '\n' + photo.province + photo.city + photo.district + photo.street}
         loading='lazy'
-        key={index}
         height={180}
         width={(document.body.clientWidth - 35) / 7}
         src={axios.defaults.baseURL + photo.file}

@@ -5,6 +5,7 @@ import Navigation from '../../../components/Header/Navigation'
 export default function Calculator() {
   useEffect(() => {
     document.title='计算器';
+    return () => document.title = 'Nohsueh';
   },[]);
 
   // result

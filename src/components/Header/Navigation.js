@@ -35,6 +35,12 @@ const items = [
         ),
         key: '/photoviewer',
       },
+      {
+        label: (
+          <Link to='/linkage'>Linkage</Link>
+        ),
+        key: '/linkage',
+      },
     ],
   },
   {
